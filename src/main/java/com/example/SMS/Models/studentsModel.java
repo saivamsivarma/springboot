@@ -6,9 +6,11 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name="students")
+@Data
 public class studentsModel {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
