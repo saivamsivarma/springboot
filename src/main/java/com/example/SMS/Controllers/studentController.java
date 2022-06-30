@@ -1,7 +1,6 @@
 package com.example.SMS.Controllers;
 
 import com.example.SMS.Models.studentsModel;
-import com.example.SMS.Repository.studentsRepository;
 import com.example.SMS.Services.studentsServices;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,11 +11,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/students")
 public class studentController {
-    private final studentsRepository studentsRepository;
     private final studentsServices studentsServices;
 
-    public studentController(studentsRepository studentsRepository, com.example.SMS.Services.studentsServices studentsServices) {
-        this.studentsRepository = studentsRepository;
+    public studentController( com.example.SMS.Services.studentsServices studentsServices) {
         this.studentsServices = studentsServices;
     }
 
@@ -24,31 +21,30 @@ public class studentController {
     @GetMapping("/all")
     public ResponseEntity<List<studentsModel>> getStudents(){
         List<studentsModel> studentList = studentsServices.getAllStudents();
-        return new ResponseEntity<>(studentList, HttpStatus.CREATED);
+        return new ResponseEntity<>(studentList, HttpStatus.OK);
     }
 
     @PostMapping("/create")
-    public ResponseEntity<studentsModel> createStudent(@RequestBody studentsModel student){
-        studentsModel newStudent = studentsServices.saveStudent(student);
-        return new ResponseEntity<>(newStudent,HttpStatus.CREATED);
+    public ResponseEntity<String> createStudent(@RequestBody studentsModel student){
+        String response= studentsServices.saveStudent(student);
+        return new ResponseEntity<>(response,HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<studentsModel> getStudent(@PathVariable long id){
         studentsModel student = studentsServices.getStudent(id);
         return new ResponseEntity<>(student, HttpStatus.OK);
-
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<studentsModel> deleteStudent(@PathVariable long id){
-        studentsModel deleteStudent =  studentsServices.deleteStudent(id);
-        return new ResponseEntity<>(deleteStudent,HttpStatus.OK);
+    public ResponseEntity<String> deleteStudent(@PathVariable long id){
+        String response =  studentsServices.deleteStudent(id);
+        return new ResponseEntity<>(response,HttpStatus.OK);
     }
 
-    @PatchMapping("/{id}")
-    public ResponseEntity<studentsModel> updateStudent(@PathVariable long id,@RequestBody studentsModel newStudent){
-        studentsModel student = studentsServices.updateStudent(id,newStudent);
+    @PatchMapping("/")
+    public ResponseEntity<studentsModel> updateStudent(@RequestBody studentsModel newStudent){
+        studentsModel student = studentsServices.updateStudent(newStudent);
         return new ResponseEntity<>(student,HttpStatus.OK);
     }
 }

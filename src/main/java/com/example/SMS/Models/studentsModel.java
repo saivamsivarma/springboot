@@ -10,7 +10,6 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name="students")
-@Data
 public class studentsModel {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
@@ -28,7 +27,7 @@ public class studentsModel {
     @Column(name="state")
     private String State;
     @Column(name="zipcode")
-    private int zipcode;
+    private Integer zipcode;
     @Column(name="country")
     private String country;
 }

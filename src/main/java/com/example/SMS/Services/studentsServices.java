@@ -1,12 +1,7 @@
 package com.example.SMS.Services;
-
 import com.example.SMS.Models.studentsModel;
 import com.example.SMS.Repository.studentsRepository;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -22,15 +17,17 @@ public class studentsServices {
       return  studentsRepository.findAll();
     }
 
-    public studentsModel saveStudent(studentsModel student){
-        return studentsRepository.save(student);
+    public String saveStudent(studentsModel student){
+        if(student.getFirst_name().equals("")&&student.getLast_name().equals("")&&student.getEmail_id().equals("")&& student.getAddress().equals("")&&student.getCity().equals("")&&student.getState().equals("")&&student.getCountry().equals("")&&student.getZipcode().equals("")) return "Fill all the required Fields";
+        else studentsRepository.save(student); return "Student Added";
     }
 
     public studentsModel getStudent (long id){
         return studentsRepository.findById(id);
     }
 
-    public studentsModel updateStudent(long id,studentsModel newStudent){
+    public studentsModel updateStudent(studentsModel newStudent){
+        long id = newStudent.getId();
         studentsModel existingStudent = studentsRepository.findById(id);
         existingStudent.setFirst_name(newStudent.getFirst_name());
         existingStudent.setLast_name(newStudent.getLast_name());
@@ -44,9 +41,8 @@ public class studentsServices {
         return existingStudent;
     }
 
-    public studentsModel deleteStudent(long id) {
-        studentsModel student = studentsRepository.findById(id);
+    public String deleteStudent(long id) {
         studentsRepository.deleteById(id);
-        return student;
+        return "Student is deleted";
     }
 }
