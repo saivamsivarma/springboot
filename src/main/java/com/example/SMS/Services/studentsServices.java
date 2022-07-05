@@ -1,16 +1,25 @@
 package com.example.SMS.Services;
+import com.example.SMS.Models.Courses;
+import com.example.SMS.Models.Students_courses;
 import com.example.SMS.Models.studentsModel;
+import com.example.SMS.Repository.StudentCoursesRepository;
+import com.example.SMS.Repository.coursesRepository;
 import com.example.SMS.Repository.studentsRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class studentsServices {
     private final studentsRepository studentsRepository;
+    private final StudentCoursesRepository studentCoursesRepository;
 
-    public studentsServices(studentsRepository studentsRepository) {
+    private final coursesRepository coursesRepository;
+    public studentsServices(studentsRepository studentsRepository, StudentCoursesRepository studentCoursesRepository, com.example.SMS.Repository.coursesRepository coursesRepository) {
         this.studentsRepository = studentsRepository;
+        this.studentCoursesRepository = studentCoursesRepository;
+        this.coursesRepository = coursesRepository;
     }
 
     public List<studentsModel> getAllStudents(){
@@ -45,4 +54,28 @@ public class studentsServices {
         studentsRepository.deleteById(id);
         return "Student is deleted";
     }
+
+    public String addCourse(long sid,long id) {
+        Courses course = coursesRepository.findById(id);
+        String course_name = course.getCourse_name();
+        studentsModel student =studentsRepository.findById(sid);
+        student.getCourses().add(course);
+        studentsRepository.save(student);
+        return "Student successfully enrolled into "+course_name;
+    }
+
+    public List<Courses> enrolledCourses(long id){
+        List<Courses> enrolled = new ArrayList<>();
+        studentsModel student = studentsRepository.findById(id);
+        if(!student.getCourses().isEmpty()){
+            enrolled =  student.getCourses();
+        }
+        return enrolled;
+    }
+
+    public String disEnroll(long sid,long id){
+            studentCoursesRepository.disEnroll(sid,id);
+            return "student disEnrolled";
+    }
+
 }

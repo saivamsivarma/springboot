@@ -1,5 +1,6 @@
 package com.example.SMS.Controllers;
 
+import com.example.SMS.Models.Courses;
 import com.example.SMS.Models.studentsModel;
 import com.example.SMS.Services.studentsServices;
 import org.springframework.http.HttpStatus;
@@ -47,4 +48,23 @@ public class studentController {
         studentsModel student = studentsServices.updateStudent(newStudent);
         return new ResponseEntity<>(student,HttpStatus.OK);
     }
+
+    @PostMapping("/addCourse/{sid}/{id}")
+    public ResponseEntity<String> addCourse(@PathVariable long sid,@PathVariable long id){
+        String response = studentsServices.addCourse(sid,id);
+        return new ResponseEntity<>(response,HttpStatus.OK);
+    }
+
+    @GetMapping("/getCourses/{id}")
+    public ResponseEntity<List<Courses>> getCourses(@PathVariable long id){
+        List<Courses> enrolledCourses = studentsServices.enrolledCourses(id);
+        return new ResponseEntity<>(enrolledCourses,HttpStatus.OK);
+    }
+
+    @DeleteMapping("/disEnroll/{sid}/{id}")
+    public ResponseEntity<String> removeCourse(@PathVariable long sid,@PathVariable long id){
+        String response = studentsServices.disEnroll(sid,id);
+        return new ResponseEntity<>(response,HttpStatus.OK);
+    }
+
 }

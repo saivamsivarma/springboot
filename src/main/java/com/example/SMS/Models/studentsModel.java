@@ -2,6 +2,8 @@ package com.example.SMS.Models;
 
 import lombok.*;
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -30,4 +32,13 @@ public class studentsModel {
     private Integer zipcode;
     @Column(name="country")
     private String country;
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @JoinTable(name = "Students_courses",
+            joinColumns = {
+                    @JoinColumn(name = "student_id", referencedColumnName = "id",
+                            nullable = false, updatable = false)},
+            inverseJoinColumns = {
+                    @JoinColumn(name = "course_id", referencedColumnName = "id",
+                            nullable = false, updatable = false)})
+    private List<Courses> courses= new ArrayList<>();
 }
