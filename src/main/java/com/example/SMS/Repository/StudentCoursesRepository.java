@@ -6,9 +6,10 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
-public interface StudentCoursesRepository extends JpaRepository<Students_courses,Long> {
-    @Transactional
-    @Modifying
-    @Query("DELETE from Students_courses sc where sc.student_id=?1 and sc.course_id=?2")
-    void disEnroll(long sid,long id);
+public interface StudentCoursesRepository extends JpaRepository<Students_courses,Long>,StudentCourseCustom {
+
+//    @Transactional
+//    @Modifying
+//    @Query("DELETE from Students_courses sc where sc.student_id=?1 and sc.course_id=?2")
+//    void disEnroll(long sid,long id);
 }

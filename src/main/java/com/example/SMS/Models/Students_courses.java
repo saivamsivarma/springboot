@@ -1,12 +1,10 @@
 package com.example.SMS.Models;
 
 import lombok.*;
-import org.springframework.data.annotation.CreatedDate;
 
 
 import javax.persistence.*;
-import java.io.Serializable;
-import java.util.Date;
+import javax.persistence.Id;
 
 @Entity
 @Data
@@ -15,16 +13,15 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name="students_courses")
-public class Students_courses implements Serializable {
-
+public class Students_courses {
     @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
     @Column(name = "student_id")
     private long student_id;
 
     @Column(name = "course_id")
     private long course_id;
-
-    @CreatedDate
-    @Column(name = "registerAt")
-    private Date registerAt;
 }

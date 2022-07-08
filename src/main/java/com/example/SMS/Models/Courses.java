@@ -1,10 +1,11 @@
 package com.example.SMS.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Data
@@ -27,13 +28,12 @@ public class Courses {
     @Column(name="department_name")
     private String department_name;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-    @JoinTable(name = "Students_courses",
-            joinColumns = {
-                    @JoinColumn(name = "student_id", referencedColumnName = "id",
-                            nullable = false, updatable = false)},
-            inverseJoinColumns = {
-                    @JoinColumn(name = "course_id", referencedColumnName = "id",
-                            nullable = false, updatable = false)})
-    private List<studentsModel> students = new ArrayList<>();
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            },
+            mappedBy = "courses")
+    @JsonIgnore
+    private Set<studentsModel> students = new HashSet<>();
 }
