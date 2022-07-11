@@ -2,7 +2,6 @@ package com.example.SMS.Services;
 
 import com.example.SMS.Exceptions.SMSExceptions;
 import com.example.SMS.Models.Courses;
-import com.example.SMS.Models.studentsModel;
 import com.example.SMS.Repository.coursesRepository;
 import com.example.SMS.utils.ErrorMessages;
 import org.springframework.stereotype.Service;

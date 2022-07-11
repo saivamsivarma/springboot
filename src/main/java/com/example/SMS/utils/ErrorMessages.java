@@ -8,7 +8,8 @@ public enum ErrorMessages {
     COUlD_NOT_UPDATE_RECORD("Could not update the Record"),
     COULD_NOT_DELETE_RECORD("Could not delete the Record"),
     COURSE_ADDED_FAILED("Course can't be Enrolled"),
-    COURSE_ALREADY_ENROLLED("Student already enrolled to this course");
+    COURSE_ALREADY_ENROLLED("Student already enrolled to this course"),
+    NO_ENROLLMENT_FOUND("No enrollment found with this id");
 
     private String errorMessage;
 

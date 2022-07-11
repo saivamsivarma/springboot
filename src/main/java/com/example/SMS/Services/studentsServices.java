@@ -10,7 +10,6 @@ import com.example.SMS.utils.ErrorMessages;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Set;
 
 @Service
 public class studentsServices {
@@ -49,8 +48,9 @@ public class studentsServices {
     }
 
     public studentsModel getStudent (long id){
+        studentsModel student;
         try{
-            studentsModel student = studentsRepository.findById(id);
+            student = studentsRepository.findById(id);
             return student;
         }catch (NullPointerException e){
             throw new SMSExceptions(ErrorMessages.RECORD_NOT_FOUND.getErrorMessage());
@@ -102,18 +102,18 @@ public class studentsServices {
         }
     }
 
-    public Set<Courses> enrolledCourses(long id){
+    public List<Courses> enrolledCourses(long id){
+        List<Courses> coursesList;
         try{
             studentsModel student = studentsRepository.findById(id);
-            Set<Courses> enrolled =  student.getCourses();
-            return enrolled;
+            coursesList =  student.getCourses();
+            return coursesList;
         }catch (RuntimeException e){
             throw new SMSExceptions(ErrorMessages.RECORD_NOT_FOUND.getErrorMessage());
         }
     }
 
     public String disEnroll(long sid,long id){
-//            studentCoursesRepository.disEnroll(sid,id);
         try{
             Students_courses enrolledRecord  = studentCoursesRepository.getAllRecords(sid,id);
             studentCoursesRepository.delete(enrolledRecord);
@@ -121,9 +121,15 @@ public class studentsServices {
         }catch (RuntimeException e){
             throw new SMSExceptions(ErrorMessages.RECORD_NOT_FOUND.getErrorMessage());
         }
-
     }
-//    public Students_courses getAllQdsl(long sid,long id){
-//        return studentCoursesRepository.getAllRecords(sid,id);
-//    }
+
+    public Object getDetails(long id) {
+        Object result;
+        try{
+            result = studentCoursesRepository.getDetails(id);
+            return result;
+        }catch(RuntimeException e){
+            throw new SMSExceptions(ErrorMessages.RECORD_NOT_FOUND.getErrorMessage());
+        }
+    }
 }

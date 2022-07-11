@@ -4,8 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Data
@@ -35,5 +34,5 @@ public class Courses {
             },
             mappedBy = "courses")
     @JsonIgnore
-    private Set<studentsModel> students = new HashSet<>();
+    private List<studentsModel> students = new ArrayList<>();
 }

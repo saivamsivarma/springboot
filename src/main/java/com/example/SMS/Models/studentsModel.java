@@ -39,5 +39,5 @@ public class studentsModel {
     @JoinTable(name = "students_courses",
             joinColumns = { @JoinColumn(name = "student_id") },
             inverseJoinColumns = { @JoinColumn(name = "course_id") })
-    private Set<Courses> courses= new HashSet<>();
+    private List<Courses> courses= new ArrayList<>();
 }
