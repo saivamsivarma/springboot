@@ -11,7 +11,7 @@ import java.util.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name="students")
-public class studentsModel {
+public class Student {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private long Id;
@@ -39,5 +39,5 @@ public class studentsModel {
     @JoinTable(name = "students_courses",
             joinColumns = { @JoinColumn(name = "student_id") },
             inverseJoinColumns = { @JoinColumn(name = "course_id") })
-    private List<Courses> courses= new ArrayList<>();
+    private List<Course> courses= new ArrayList<>();
 }

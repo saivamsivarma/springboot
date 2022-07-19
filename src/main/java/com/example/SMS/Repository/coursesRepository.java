@@ -1,9 +1,9 @@
 package com.example.SMS.Repository;
 
-import com.example.SMS.Models.Courses;
+import com.example.SMS.Models.Course;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 
-public interface coursesRepository extends JpaRepository<Courses,Long> {
-    Courses findById(long id);
+public interface coursesRepository extends JpaRepository<Course,Long> {
+    Course findById(long id);
 }

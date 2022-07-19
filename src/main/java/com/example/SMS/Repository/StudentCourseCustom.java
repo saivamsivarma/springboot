@@ -1,12 +1,13 @@
 package com.example.SMS.Repository;
 
-import com.example.SMS.Models.Students_courses;
+import com.example.SMS.Models.Student;
+import com.example.SMS.Models.StudentCourse;
 
 
 public interface StudentCourseCustom {
 
-    Students_courses getAllRecords(long sid,long id);
+    StudentCourse getAllRecords(long sid, long id);
 
-//    studentsModel getDetails(long id);
-    Object getDetails(long id);
+//    Student getDetails(long id);
+    Student getDetails(long id);
 }

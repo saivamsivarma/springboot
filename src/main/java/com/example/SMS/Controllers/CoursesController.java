@@ -1,6 +1,6 @@
 package com.example.SMS.Controllers;
 
-import com.example.SMS.Models.Courses;
+import com.example.SMS.Models.Course;
 import com.example.SMS.Services.CoursesServices;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,20 +18,20 @@ public class CoursesController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Courses> createCourse(@RequestBody Courses course){
-        Courses newCourse = coursesServices.createCourse(course);
+    public ResponseEntity<Course> createCourse(@RequestBody Course course){
+        Course newCourse = coursesServices.createCourse(course);
         return new ResponseEntity<>(newCourse, HttpStatus.CREATED);
     }
 
     @GetMapping("/getAll")
-    public ResponseEntity<List<Courses>> getAllCourses(){
-        List<Courses> courseList = coursesServices.getAllCourses();
+    public ResponseEntity<List<Course>> getAllCourses(){
+        List<Course> courseList = coursesServices.getAllCourses();
         return new ResponseEntity<>(courseList,HttpStatus.OK);
     }
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<Courses> getCourse(@PathVariable long id){
-        Courses course = coursesServices.getCoursesById(id);
+    public ResponseEntity<Course> getCourse(@PathVariable long id){
+        Course course = coursesServices.getCoursesById(id);
         return new ResponseEntity<>(course,HttpStatus.OK);
     }
 
@@ -42,8 +42,8 @@ public class CoursesController {
     }
 
     @PatchMapping("/update/{id}")
-    public ResponseEntity<Courses> updateCourse(@PathVariable long id, @RequestBody Courses course){
-        Courses updatedCourse = coursesServices.updateCourses(id,course);
+    public ResponseEntity<Course> updateCourse(@PathVariable long id, @RequestBody Course course){
+        Course updatedCourse = coursesServices.updateCourses(id,course);
         return new ResponseEntity<>(updatedCourse,HttpStatus.OK);
     }
 }

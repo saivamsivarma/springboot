@@ -14,14 +14,14 @@ public class StudentCourseCustomImpl implements StudentCourseCustom{
     public static QstudentsModel qstudentsModel = QstudentsModel.studentsModel;
     public static QCourses qCourses = QCourses.courses;
     @Override
-    public Students_courses getAllRecords(long sid,long id) {
-        JPAQuery<Students_courses> jpaQuery = new JPAQuery<>(em);
+    public StudentCourse getAllRecords(long sid, long id) {
+        JPAQuery<StudentCourse> jpaQuery = new JPAQuery<>(em);
         return  jpaQuery.from(qStudents_courses).where(qStudents_courses.student_id.eq(sid),qStudents_courses.course_id.eq(id)).fetchFirst();
     }
 
     @Override
-    public Object getDetails(long id) {
-        JPAQuery<?> jpaQuery = new JPAQuery<>(em);
+    public Student getDetails(long id) {
+        JPAQuery<Student> jpaQuery = new JPAQuery<>(em);
 
         return jpaQuery
                 .from(qstudentsModel)

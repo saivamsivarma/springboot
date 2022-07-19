@@ -13,15 +13,15 @@ import javax.persistence.Id;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name="students_courses")
-public class Students_courses {
+public class StudentCourse {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(name = "student_id")
-    private long student_id;
+    private long studentId;
 
     @Column(name = "course_id")
-    private long course_id;
+    private long courseId;
 }

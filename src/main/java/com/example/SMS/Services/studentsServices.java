@@ -1,8 +1,8 @@
 package com.example.SMS.Services;
 import com.example.SMS.Exceptions.SMSExceptions;
-import com.example.SMS.Models.Courses;
-import com.example.SMS.Models.Students_courses;
-import com.example.SMS.Models.studentsModel;
+import com.example.SMS.Models.Course;
+import com.example.SMS.Models.Student;
+import com.example.SMS.Models.StudentCourse;
 import com.example.SMS.Repository.StudentCoursesRepository;
 import com.example.SMS.Repository.coursesRepository;
 import com.example.SMS.Repository.studentsRepository;
@@ -24,8 +24,8 @@ public class studentsServices {
         this.coursesRepository = coursesRepository;
     }
 
-    public List<studentsModel> getAllStudents(){
-        List<studentsModel> studentsList;
+    public List<Student> getAllStudents(){
+        List<Student> studentsList;
         try{
             studentsList = studentsRepository.findAll();
             if(studentsList.isEmpty()) throw new SMSExceptions(ErrorMessages.RECORD_NOT_FOUND.getErrorMessage());
@@ -35,7 +35,7 @@ public class studentsServices {
         }
     }
 
-    public String saveStudent(studentsModel student){
+    public String saveStudent(Student student){
         try{
             if(!student.getFirst_name().isEmpty() && !student.getLast_name().isEmpty() && !student.getEmail_id().isEmpty()
                     && !student.getAddress().isEmpty() && !student.getCity().isEmpty() && !student.getCountry().isEmpty() && !student.getZipcode().equals("")){
@@ -47,8 +47,8 @@ public class studentsServices {
         }
     }
 
-    public studentsModel getStudent (long id){
-        studentsModel student;
+    public Student getStudent (long id){
+        Student student;
         try{
             student = studentsRepository.findById(id);
             return student;
@@ -57,9 +57,9 @@ public class studentsServices {
         }
     }
 
-    public studentsModel updateStudent(long id, studentsModel newStudent){
+    public Student updateStudent(long id, Student newStudent){
             try{
-            studentsModel existingStudent = studentsRepository.findById(id);
+            Student existingStudent = studentsRepository.findById(id);
             if(existingStudent ==null) throw new SMSExceptions(ErrorMessages.RECORD_NOT_FOUND.getErrorMessage());
             existingStudent.setFirst_name(newStudent.getFirst_name());
             existingStudent.setLast_name(newStudent.getLast_name());
@@ -78,7 +78,7 @@ public class studentsServices {
 
     public String deleteStudent(long id) {
         try{
-            studentsModel student = studentsRepository.findById(id);
+            Student student = studentsRepository.findById(id);
             if(student ==null) throw new SMSExceptions(ErrorMessages.RECORD_NOT_FOUND.getErrorMessage());
             studentsRepository.deleteById(id);
             return "Student is deleted";
@@ -89,8 +89,8 @@ public class studentsServices {
 
     public String addCourse(long sid,long id) {
         try{
-            studentsModel student =studentsRepository.findById(sid);
-            Courses course = coursesRepository.findById(id);
+            Student student =studentsRepository.findById(sid);
+            Course course = coursesRepository.findById(id);
             if(course == null && student ==null) throw new SMSExceptions(ErrorMessages.INTERNAL_SERVER_ERROR.getErrorMessage());
             String course_name = course.getCourse_name();
             if(student.getCourses().contains(course)) throw new SMSExceptions(ErrorMessages.COURSE_ALREADY_ENROLLED.getErrorMessage());
@@ -102,10 +102,10 @@ public class studentsServices {
         }
     }
 
-    public List<Courses> enrolledCourses(long id){
-        List<Courses> coursesList;
+    public List<Course> enrolledCourses(long id){
+        List<Course> coursesList;
         try{
-            studentsModel student = studentsRepository.findById(id);
+            Student student = studentsRepository.findById(id);
             coursesList =  student.getCourses();
             return coursesList;
         }catch (RuntimeException e){
@@ -115,7 +115,7 @@ public class studentsServices {
 
     public String disEnroll(long sid,long id){
         try{
-            Students_courses enrolledRecord  = studentCoursesRepository.getAllRecords(sid,id);
+            StudentCourse enrolledRecord  = studentCoursesRepository.getAllRecords(sid,id);
             studentCoursesRepository.delete(enrolledRecord);
             return "student disEnrolled";
         }catch (RuntimeException e){
@@ -123,8 +123,8 @@ public class studentsServices {
         }
     }
 
-    public Object getDetails(long id) {
-        Object result;
+    public Student getDetails(long id) {
+        Student result;
         try{
             result = studentCoursesRepository.getDetails(id);
             return result;

@@ -1,28 +1,11 @@
 package com.example.SMS.controller;
 
-import com.example.SMS.Models.Courses;
-import com.example.SMS.Models.studentsModel;
 import com.example.SMS.Services.CoursesServices;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.RequestBuilder;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -36,14 +19,14 @@ public class CoursesControllerIT {
     @MockBean
     private CoursesServices coursesServices;
 
-//    Set<studentsModel> students = new HashSet<>();
-//    Courses course = new Courses(1, "cs23456", "C# programming", "Shyam singh roy", "Computer science");
+//    Set<Student> students = new HashSet<>();
+//    Course course = new Course(1, "cs23456", "C# programming", "Shyam singh roy", "Computer science");
 //
 //    @Test
 //    public void testCreateStudent() throws Exception {
 //        String convertedData = covertToJson(course);
-//        String URL = "/Courses/create";
-//        Mockito.when(coursesServices.createCourse(Mockito.any(Courses.class))).thenReturn(course);
+//        String URL = "/Course/create";
+//        Mockito.when(coursesServices.createCourse(Mockito.any(Course.class))).thenReturn(course);
 //        //sending request
 //        RequestBuilder requestBuilder = MockMvcRequestBuilders.post(URL).content(convertedData).contentType(MediaType.APPLICATION_JSON);
 //        //getting result
@@ -60,7 +43,7 @@ public class CoursesControllerIT {
 //    public void testGetStudentById() throws Exception {
 //        Mockito.when(coursesServices.getCoursesById(Mockito.anyLong())).thenReturn(course);
 //
-//        String URI = "/Courses/get/1";
+//        String URI = "/Course/get/1";
 //        RequestBuilder requestBuilder = MockMvcRequestBuilders.get(URI).accept(MediaType.APPLICATION_JSON);
 //
 //        MvcResult result = mockMvc.perform(requestBuilder).andReturn();
@@ -73,10 +56,10 @@ public class CoursesControllerIT {
 //
 //    @Test
 //    public void testGetAllStudents() throws Exception {
-//        List<Courses> courses = new ArrayList<>();
+//        List<Course> courses = new ArrayList<>();
 //        courses.add(course);
 //        Mockito.when(coursesServices.getAllCourses()).thenReturn(courses);
-//        String URL = "/Courses/getAll";
+//        String URL = "/Course/getAll";
 //        RequestBuilder requestBuilder = MockMvcRequestBuilders.get(URL).accept(MediaType.APPLICATION_JSON);
 //        MvcResult result = mockMvc.perform(requestBuilder).andReturn();
 //        String expectedJson = this.covertToJson(courses);
@@ -88,11 +71,11 @@ public class CoursesControllerIT {
 //
 //   @Test
 //    public void testUpdateStudent() throws Exception {
-//       Courses updatedCourse = new Courses(1, "cs23456", "C# programming", "Shyam singh", "Computer science");
+//       Course updatedCourse = new Course(1, "cs23456", "C# programming", "Shyam singh", "Computer science");
 //
 //        String convertedData = this.covertToJson(updatedCourse);
 //        Mockito.when(coursesServices.updateCourses(1L,updatedCourse)).thenReturn(updatedCourse);
-//        String URL = "/Courses/update/1";
+//        String URL = "/Course/update/1";
 //        //sending request
 //        RequestBuilder requestBuilder = MockMvcRequestBuilders.patch(URL).content(convertedData).contentType(MediaType.APPLICATION_JSON);
 //        //getting result
@@ -107,7 +90,7 @@ public class CoursesControllerIT {
 //     @Test
 //    public void testDeleteStudent() throws Exception{
 //        Mockito.when(coursesServices.deleteCourses(Mockito.anyLong())).thenReturn("Course deleted");
-//        String  URL = "/Courses/delete/1";
+//        String  URL = "/Course/delete/1";
 //        RequestBuilder requestBuilder = MockMvcRequestBuilders.delete(URL).contentType(MediaType.APPLICATION_JSON);
 //        MvcResult result = mockMvc.perform(requestBuilder).andReturn();
 //        System.out.println(result.getResponse().getContentAsString());

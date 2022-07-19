@@ -1,7 +1,7 @@
 package com.example.SMS.Controllers;
 
-import com.example.SMS.Models.Courses;
-import com.example.SMS.Models.studentsModel;
+import com.example.SMS.Models.Course;
+import com.example.SMS.Models.Student;
 import com.example.SMS.Services.studentsServices;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,20 +20,20 @@ public class studentController {
 
 
     @GetMapping("/all")
-    public ResponseEntity<List<studentsModel>> getStudents(){
-        List<studentsModel> studentList = studentsServices.getAllStudents();
+    public ResponseEntity<List<Student>> getStudents(){
+        List<Student> studentList = studentsServices.getAllStudents();
         return new ResponseEntity<>(studentList, HttpStatus.OK);
     }
 
     @PostMapping("/create")
-    public ResponseEntity<String> createStudent(@RequestBody studentsModel student){
+    public ResponseEntity<String> createStudent(@RequestBody Student student){
         String response= studentsServices.saveStudent(student);
         return new ResponseEntity<>(response,HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<studentsModel> getStudent(@PathVariable long id){
-        studentsModel student = studentsServices.getStudent(id);
+    public ResponseEntity<Student> getStudent(@PathVariable long id){
+        Student student = studentsServices.getStudent(id);
         return new ResponseEntity<>(student, HttpStatus.OK);
     }
 
@@ -44,8 +44,8 @@ public class studentController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<studentsModel> updateStudent(@PathVariable long id,@RequestBody studentsModel newStudent){
-        studentsModel student = studentsServices.updateStudent(id,newStudent);
+    public ResponseEntity<Student> updateStudent(@PathVariable long id, @RequestBody Student newStudent){
+        Student student = studentsServices.updateStudent(id,newStudent);
         return new ResponseEntity<>(student,HttpStatus.OK);
     }
 
@@ -56,8 +56,8 @@ public class studentController {
     }
 
     @GetMapping("/getCourses/{id}")
-    public ResponseEntity<List<Courses>> getCourses(@PathVariable long id){
-        List<Courses> enrolledCourses = studentsServices.enrolledCourses(id);
+    public ResponseEntity<List<Course>> getCourses(@PathVariable long id){
+        List<Course> enrolledCourses = studentsServices.enrolledCourses(id);
         return new ResponseEntity<>(enrolledCourses,HttpStatus.OK);
     }
 
@@ -68,8 +68,8 @@ public class studentController {
     }
 
     @GetMapping("getDetails/{id}")
-    public ResponseEntity<Object> getDetails(@PathVariable long id){
-        Object response = studentsServices.getDetails(id);
+    public ResponseEntity<Student> getDetails(@PathVariable long id){
+        Student response = studentsServices.getDetails(id);
         return new ResponseEntity<>(response,HttpStatus.OK);
     }
 }

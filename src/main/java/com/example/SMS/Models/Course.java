@@ -14,7 +14,7 @@ import java.util.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name="Courses")
-public class Courses {
+public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -34,5 +34,5 @@ public class Courses {
             },
             mappedBy = "courses")
     @JsonIgnore
-    private List<studentsModel> students = new ArrayList<>();
+    private List<Student> students = new ArrayList<>();
 }

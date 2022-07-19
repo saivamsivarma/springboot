@@ -2,26 +2,16 @@ package com.example.SMS.Service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.example.SMS.Models.Courses;
-import com.example.SMS.Models.studentsModel;
 import com.example.SMS.Services.studentsServices;
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 @SpringBootTest
 public class StudentServiceIT {
     @Autowired
     private studentsServices studentsServices;
 
-//    studentsModel student = new studentsModel(1,"John","Williams","johnwilliams@gmail.com","1578 W Ramsey Drive","Mountain House","California",95315,"USA");
+//    Student student = new Student(1,"John","Williams","johnwilliams@gmail.com","1578 W Ramsey Drive","Mountain House","California",95315,"USA");
 //   @Transactional
 //    @Test
 //    @Order(1)
@@ -38,7 +28,7 @@ public class StudentServiceIT {
 //    @Test
 //    @Order(2)
 //    public void testGetStudents(){
-//        List<studentsModel> studentsList = new ArrayList<>();
+//        List<Student> studentsList = new ArrayList<>();
 //        studentsList.add(student);
 //        assertThat(studentsServices.getAllStudents()).isEqualTo(studentsList);
 //    }
@@ -46,7 +36,7 @@ public class StudentServiceIT {
 //    @Test
 //    @Order(3)
 //    public void testUpdateStudent(){
-//        studentsModel student = new studentsModel();
+//        Student student = new Student();
 //        student.setId(2);
 //        student.setFirst_name("John");
 //        student.setLast_name("Williams");

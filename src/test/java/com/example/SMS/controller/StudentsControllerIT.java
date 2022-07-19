@@ -1,28 +1,13 @@
 package com.example.SMS.controller;
 
-import com.example.SMS.Models.Courses;
-import com.example.SMS.Models.studentsModel;
 import com.example.SMS.Services.studentsServices;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.*;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -32,14 +17,14 @@ public class StudentsControllerIT {
     @MockBean
     private studentsServices studentsServices;
 
-    //Set<Courses> courses = new HashSet<>();
-//    studentsModel student = new studentsModel(2,"Rick","Williams","rickWilliams@gmail.com","2044 W 138th ter","Leawood","Kansas City",66223,"USA");
+    //Set<Course> courses = new HashSet<>();
+//    Student student = new Student(2,"Rick","Williams","rickWilliams@gmail.com","2044 W 138th ter","Leawood","Kansas City",66223,"USA");
 //
 //    @Test
 //    public void testSaveStudentSuccess() throws Exception {
 //        String convertStudent = this.covertToJson(student);
 //        String URL = "/students/create";
-//        Mockito.when(studentsServices.saveStudent(Mockito.any(studentsModel.class))).thenReturn("Student Added");
+//        Mockito.when(studentsServices.saveStudent(Mockito.any(Student.class))).thenReturn("Student Added");
 //        //sending request
 //        RequestBuilder requestBuilder = MockMvcRequestBuilders.post(URL).content(convertStudent).contentType(MediaType.APPLICATION_JSON);
 //        //getting result
@@ -68,7 +53,7 @@ public class StudentsControllerIT {
 //
 //    @Test
 //    public void testGetAllStudents() throws Exception {
-//        List<studentsModel> studentsList = new ArrayList<>();
+//        List<Student> studentsList = new ArrayList<>();
 //        studentsList.add(student);
 //        Mockito.when(studentsServices.getAllStudents()).thenReturn(studentsList);
 //        String URI = "/students/all";
@@ -83,7 +68,7 @@ public class StudentsControllerIT {
 //
 //    @Test
 //    public void testUpdateStudent() throws Exception {
-//        studentsModel student = new studentsModel();
+//        Student student = new Student();
 //        student.setId(2);
 //        student.setFirst_name("Rick");
 //        student.setLast_name("Williams");
@@ -94,7 +79,7 @@ public class StudentsControllerIT {
 //        student.setZipcode(66223);
 //        student.setCountry("USA");
 //        String convertData = this.covertToJson(student);
-//        Mockito.when(studentsServices.updateStudent(Mockito.any(studentsModel.class))).thenReturn(student);
+//        Mockito.when(studentsServices.updateStudent(Mockito.any(Student.class))).thenReturn(student);
 //        String URL = "/students/";
 //        //sending request
 //        RequestBuilder requestBuilder = MockMvcRequestBuilders.patch(URL).content(convertData).contentType(MediaType.APPLICATION_JSON);
